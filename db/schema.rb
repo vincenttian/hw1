@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140927224942) do
+ActiveRecord::Schema.define(version: 20140927230714) do
 
   create_table "users", force: true do |t|
     t.string  "name"
     t.decimal "age"
     t.string  "major"
+    t.integer "yearsOld"
   end
 
 end
