@@ -12,6 +12,21 @@ Anything that is meant to be run in your shell has a \$ infront of it while anyt
 
 > $ rake db:drop
 
+**Resources to Help You Develop:**
+
+Gems:
+
+In the Gemfile, we've included 2 gems:
+1. Better Errors: https://github.com/charliesome/better_errors
+2. Binding of Caller: https://github.com/banister/binding_of_caller
+This will make debugging your Rails applications much easier; include them in your future rails projects for easier development!
+
+Migrations:
+
+Last class, we found that many students had trouble with migrations, so we are including this resource for more information about migrations. This resource is relatively short and will give you a full understanding on what migrations are and how migrations work in rails. Refer to this resource for help on writing migrations!
+
+http://guides.rubyonrails.org/migrations.html
+
 **What To Do:**
 
 Let's say one day we had a genius idea of making a website that would be a database of users that people can use for data mining, cloud, big data or whatever buzzword is in nowadays.  We would first make a user index.

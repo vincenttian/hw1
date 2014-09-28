@@ -27,6 +27,10 @@ gem 'spring',        group: :development
 
 gem 'rails_12factor', group: :production
 
+# Gem for better rails errors whenever your code breaks; includes interactive Riuby shell
+gem 'better_errors', '~> 1.1.0'
+gem 'binding_of_caller', '~> 0.7.2'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
