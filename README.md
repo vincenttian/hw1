@@ -10,7 +10,7 @@ Anything that is meant to be run in your shell has a \$ infront of it while anyt
 
 **WARNING: DO NOT EDIT MIGRATION FILES, OR BAD THINGS MIGHT HAPPEN.  IF YOU DID AND YOUR DATABASE IS SCREWED UP, TYPE THE COMMAND**
 
-> \$rake db:drop
+> $ rake db:drop
 
 **What To Do:**
 
@@ -20,13 +20,15 @@ Let's say one day we had a genius idea of making a website that would be a datab
 
   The user index in the controller will be the root of this app.  We already created the user controller and the view so don't worry about that yet. In your routes.rb file add:
 
+```ruby
   root 'users#index'
+```
 
   Now if we start up our application we get a 'NameError in UsersController#index'.  If we look at the code snippet that is in the Error we realize that when we are calling User.all we are calling something that doesn't exist (our User model).
   The whole point of the app is to have users so having a user model would be pretty important.  We also want to have fields in our user that people would find valuable, like name and years old.  To create a user model in our rails app and
   a user table in our database we run:
 
-  rails generate model User name:string yearsOld:integer
+  > $ rails generate model User name:string yearsOld:integer
 
   This rails generate command creates a user model so that our rails application can interact with the user data and a migration file.  A migration file is a script that basically gives the database commands such as creating tables, adding columns, and removing
   columns.  The important thing we should note about migrations is that we should NEVER edit an old migration file directly.  We should ONLY add migrations.  If we don't, inconsistancies in the database might appear and our user data will be useless, and so
@@ -37,24 +39,24 @@ Let's say one day we had a genius idea of making a website that would be a datab
   This will tell rails the read the migraiton files and run their commands.  Now refresh your root page and it should now be working.  The page is pretty empty because there are no users in the database, which is pretty boring.  To add users into our database
   we can open our rails console (think about it as running our app without views) by typing:
 
-  rails console
+   > $ rails console
 
   After the console is open type in the command in the console:
 
-  > u = User.new
+  > > u = User.new
 
   This creates a new empty user object and stores it in the variable u.  To set its name and years old type in the commands:
 
-  > u.name = "John Doe"
-  > u.yearsOld = "15"
+  > > u.name = "John Doe"
+  > > u.yearsOld = "15"
 
   Now our user exists with the name "John Doe" and the yearsOld 15 but isn't saved into our database, it only exists in our ruby environment.  To save an object into the database we can call:
 
-  > u.save
+  > > u.save
 
   This will store the user stored in the variable u into the database.  To query for all the users in the database enter:
 
-  > User.all
+  > > User.all
 
   After saving the user refresh the page and now your index should be populated with the user John Doe!  To get a basic understanding of how this is working you can observe the index function in the UsersController (app/controller/users_controller.rb)
   and look at the index view (app/views/users/index.html.erb)
@@ -106,7 +108,13 @@ end
   function (think about the create function as calling new function then the save function of the model) on the paramenter user_params.  If we go to the bottom of the file user_params only permits the :name hash to be passed on. If we add a the yearsOld hash so
   it reads:
 
+```ruby
+
+def user_params
   params.require(:user).permit(:name, :yearsOld)
+end
+
+```
 
   We tell rails we are going to allow yearsOld to be passed along.  Save and try now to add a user through the new view and the yearsOld value should now save.
 
@@ -116,23 +124,23 @@ Currently in our user table to keep the age of our user we have a column years o
 since we only have test data it is cool to delete the yearsOld column and add the age column.  TO REMOVE A COLUMN WE DO NOT WANT TO EDIT OUR MIGRATION FILES.  We should rather run another migration that will tell our database to delete the column.  Since
 rails is nice and has all these magical powers we can easily generate a migration by typing the command:
 
-rails generate migration RemoveCOLUMNFromTABLE COLUMNNAME:DATATYPE
+> $ rails generate migration RemoveCOLUMNFromTABLE COLUMNNAME:DATATYPE
 
 Where we enter the correct values for the words that are all caps.  This means for our purpose we want to do this command:
 
-rails generate migration RemoveYearsOldFromUsers yearsOld:integer
+> $ rails generate migration RemoveYearsOldFromUsers yearsOld:integer
 
 Now that the column is gone we want to add our new age column.  To create a migration to add a column to a table we use the command:
 
-rails generate migration AddCOLUMNToTABLE COLUMNNAME:DATATYPE
+> $ rails generate migration AddCOLUMNToTABLE COLUMNNAME:DATATYPE
 
 where we replace all the uppercase words to the correct value.  This means we should type the command:
 
-rails generate migration AddAgeToUsers age:integer
+> $ rails generate migration AddAgeToUsers age:integer
 
 After creating both migrations we should run them to update our database with:
 
-rake db:migrate
+> $ rake db:migrate
 
 Now that our Users now have these fields we have to update our show view, the new view, and the user_params to use the age column rather than the years old column.  After we do that we should test our app to see if any future users we add saves the age and
 correctly displays it.
