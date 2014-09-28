@@ -68,11 +68,11 @@ Let's say one day we had a genius idea of making a website that would be a datab
   function we call User.find(params[:id]).  What User.find(num) does is it queries the User table for a user with id num.  You can open up the rails console and try this yourself.  If we look at the show view
   (app/views/users/show.html.erb) we are trying to access a variable called @user.  We should go in the controller and tie the variable @user to the output of User.find so our view has access to the user's content.  Our show should now look like:
 
-'''ruby
+```ruby
 def show
   @user = User.find(params[:id])
 end
-'''
+```
 
 
   After doing that click on a user in the index to see the show view.
@@ -82,11 +82,11 @@ end
   we look at our new view we can see that it needs a variable called @user which is a object of model User.  That means in our UsersController (app/controllers/users_controller.rb) we should define a function called new and create an empty user called @user
   for our view to use:
 
-'''
+```ruby
   def new
     @user = User.new
   end
-'''
+```
 
   After we do that and save we should route our new user page as:
 
