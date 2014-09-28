@@ -8,6 +8,34 @@ http://powerful-forest-5694.herokuapp.com/
 
 What To Do:
 
+Adding the new function to the controller
+  On the top left of the index page the AddUser button links to a '/user/new', however there is no route for that (our rails application does not know how to process that GET request) and there is no new command in our controller, but there is a new view.  If
+  we look at our new view we can see that it needs a variable called @user which is a object of model User.  That means in our UsersController (app/controllers/users_controller.rb) we should define a function called new and create an empty user called @user
+  for our view to use:
+
+  def new
+    @user = User.new
+  end
+
+  After we do that and save we should route our new user page as:
+
+    get '/user/new', to: 'CONTROLLER#FUNCTION'
+
+  Try to figure out what to replace CONTROLLER and FUNCTION with (Look at how routed the show and the about page).  After we finish the routing we should click the Add User button on the top left to check to see if we get to the new page.  If that works
+  try adding users by inputting names, clicking create, and clicking on home to check.
+
+Adding yearsOld to form input
+  So right now the only field you can add to your user when you create one is the users name.  Our users have a column called yearsOld that we want to also keep.  To do this we want to add a form input to the new users view.  To do this simply copy the
+  form input for the name and paste it next to it.  Instead of ':name' though we want the form input to match up to ':yearsOld'.  This value tells the form input what it should match up to.  After we copy the form input try and add a new user with a yearsOld
+  value.  Go to the show view of the user and check if it has an age.  If you look the age doesn't appear there, but why?.  In rails, we have a concept of strong parameters, which means that our app will only allow specific parameters to be passed to our
+  controller.  This provides security incase someone wants to add or edit information they don't have access to.  If you open up the UsersController (app/controllers/users_controller.rb) and look at the create function you will notice that it runs the create
+  function (think about the create function as calling new function then the save function of the model) on the paramenter user_params.  If we go to the bottom of the file user_params only permits the :name hash to be passed on. If we add a the yearsOld hash so
+  it reads:
+
+  params.require(:user).permit(:name, :yearsOld)
+
+  We tell rails we are going to allow yearsOld to be passed along.  Save and try now to add a user through the new view and the yearsOld value should now save.
+
 Removing yearsOld and adding Age
 Currently in our user table to keep the age of our user we have a column years old.  Let's say we determine that we are lazy and yearsOld is a terrible name for a column and we want to name the column age instead.  We have not put our rails app online and
 since we only have test data it is cool to delete the yearsOld column and add the age column.  TO REMOVE A COLUMN WE DO NOT WANT TO EDIT OUR MIGRATION FILES.  We should rather run another migration that will tell our database to delete the column.  Since
