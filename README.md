@@ -43,20 +43,20 @@ Let's say one day we had a genius idea of making a website that would be a datab
 
   After the console is open type in the command in the console:
 
-  > > u = User.new
+  > \> u = User.new
 
   This creates a new empty user object and stores it in the variable u.  To set its name and years old type in the commands:
 
-  > > u.name = "John Doe"
-  > > u.yearsOld = "15"
+  > \> u.name = "John Doe"
+  > \> u.yearsOld = "15"
 
   Now our user exists with the name "John Doe" and the yearsOld 15 but isn't saved into our database, it only exists in our ruby environment.  To save an object into the database we can call:
 
-  > > u.save
+  > \> u.save
 
   This will store the user stored in the variable u into the database.  To query for all the users in the database enter:
 
-  > > User.all
+  > \> User.all
 
   After saving the user refresh the page and now your index should be populated with the user John Doe!  To get a basic understanding of how this is working you can observe the index function in the UsersController (app/controller/users_controller.rb)
   and look at the index view (app/views/users/index.html.erb)
