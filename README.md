@@ -8,6 +8,18 @@ http://powerful-forest-5694.herokuapp.com/
 
 What To Do:
 
+Displaying values on the Show User Page:
+  If we look at routes file we see a get request for 'users/:id' that will link to the UsersController's show function (app/controllers/users_controller).  The :id just means the value that comes after the / will be put into a dictionary (hashMap if you have
+  taken 61B) called params with the key being :id and the value being whatever comes after the /.  We won't worry about how we are passing the id's when we click on users in our index page for now.  Now let's take a look at the UsersController.  In the show
+  function we call User.find(params[:id]).  What User.find(num) does is it queries the User table for a user with id num.  You can open up the rails console and try this yourself.  If we look at the show view
+  (app/views/users/show.html.erb) we are trying to access a variable called @user.  We should go in the controller and tie the variable @user to the output of User.find so our view has access to the user's content.  Our show should now look like:
+
+  def show
+    @user = User.find(params[:id])
+  end
+
+  After doing that click on a user in the index to see the show view.
+
 Adding the new function to the controller
   On the top left of the index page the AddUser button links to a '/user/new', however there is no route for that (our rails application does not know how to process that GET request) and there is no new command in our controller, but there is a new view.  If
   we look at our new view we can see that it needs a variable called @user which is a object of model User.  That means in our UsersController (app/controllers/users_controller.rb) we should define a function called new and create an empty user called @user
