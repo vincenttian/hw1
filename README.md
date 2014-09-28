@@ -6,9 +6,11 @@ From the Add User button on the top left of the user index you can go to a page 
 
 http://powerful-forest-5694.herokuapp.com/
 
+Anything that is meant to be run in your shell has a \$ infront of it while anything with a \> is meant to be run in your rails console.
+
 **WARNING: DO NOT EDIT MIGRATION FILES, OR BAD THINGS MIGHT HAPPEN.  IF YOU DID AND YOUR DATABASE IS SCREWED UP, TYPE THE COMMAND**
 
-rake db:drop
+> \$rake db:drop
 
 **What To Do:**
 
