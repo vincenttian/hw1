@@ -13,6 +13,7 @@
       <%= form_for @user, html: {class: 'navbar-form navbar-right'} do |f| %>
         <div class="form-group">
           <%= f.text_field :name, class: 'form-control', placeholder: 'Name' %>
+          <%= f.text_field :age, class: 'form-control', placeholder: 'Age' %>
         </div>
         <%= f.submit "Create", class: 'btn btn-success' %>
       <% end %>
